@@ -4,117 +4,124 @@
  */
 package com.vvr.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- *
+ * Pruebas unitarias para la clase Portafolio.
+ * Se enfoca en verificar la correcta inicialización y la funcionalidad de agregar elementos.
  * @author vanesa
  */
 public class PortafolioTest {
     
+    // Instancia de la clase Portafolio a probar
+    private Portafolio instance; 
+
     public PortafolioTest() {
     }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
+
+    /**
+     * Inicializa una nueva instancia de Portafolio antes de cada método de prueba.
+     * Usamos el constructor por defecto, que inicializa las listas internamente.
+     */
     @BeforeEach
     public void setUp() {
+        instance = new Portafolio(); 
     }
-    
+
+    /**
+     * Limpieza después de cada prueba.
+     */
     @AfterEach
     public void tearDown() {
+        instance = null;
     }
 
-    /**
-     * Test of getLogros method, of class Portafolio.
-     */
+    // -------------------------------------------------------------------------
+    // PRUEBAS DE INICIALIZACIÓN Y GETTERS
+    // -------------------------------------------------------------------------
+
     @Test
-    public void testGetLogros() {
-        System.out.println("getLogros");
-        Portafolio instance = new Portafolio();
-        List<Logro> expResult = null;
+    public void testGetLogros_InicialVacio() {
+        System.out.println("testGetLogros_InicialVacio");
         List<Logro> result = instance.getLogros();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        // Verificamos que la lista se inicialice correctamente (no nula y vacía)
+        assertNotNull(result, "La lista de logros no debe ser nula después de la inicialización.");
+        assertTrue(result.isEmpty(), "La lista de logros debe estar vacía inicialmente.");
     }
 
-    /**
-     * Test of setLogros method, of class Portafolio.
-     */
+    @Test
+    public void testGetOportunidadesMejora_InicialVacio() {
+        System.out.println("testGetOportunidadesMejora_InicialVacio");
+        List<String> result = instance.getOportunidadesMejora();
+        
+        // Verificamos que la lista se inicialice correctamente (no nula y vacía)
+        assertNotNull(result, "La lista de oportunidades no debe ser nula después de la inicialización.");
+        assertTrue(result.isEmpty(), "La lista de oportunidades debe estar vacía inicialmente.");
+    }
+
+    // -------------------------------------------------------------------------
+    // PRUEBAS DE SETTERS
+    // -------------------------------------------------------------------------
+
     @Test
     public void testSetLogros() {
-        System.out.println("setLogros");
-        List<Logro> logros = null;
-        Portafolio instance = new Portafolio();
-        instance.setLogros(logros);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("testSetLogros");
+        List<Logro> nuevaLista = new ArrayList<>();
+        nuevaLista.add(new Logro(1, "Test", "Test Set"));
+        
+        instance.setLogros(nuevaLista);
+        
+        // Verificamos que la lista haya sido reemplazada
+        assertEquals(1, instance.getLogros().size(), "La lista de logros debe tener un elemento después de setLogros.");
+        assertEquals("Test", instance.getLogros().get(0).getCategoria(), "El logro debe ser el que acabamos de establecer.");
     }
 
-    /**
-     * Test of getOportunidadesMejora method, of class Portafolio.
-     */
-    @Test
-    public void testGetOportunidadesMejora() {
-        System.out.println("getOportunidadesMejora");
-        Portafolio instance = new Portafolio();
-        List<String> expResult = null;
-        List<String> result = instance.getOportunidadesMejora();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setOportunidadesMejora method, of class Portafolio.
-     */
     @Test
     public void testSetOportunidadesMejora() {
-        System.out.println("setOportunidadesMejora");
-        List<String> oportunidadesMejora = null;
-        Portafolio instance = new Portafolio();
-        instance.setOportunidadesMejora(oportunidadesMejora);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("testSetOportunidadesMejora");
+        List<String> nuevaLista = new ArrayList<>();
+        nuevaLista.add("Física avanzada");
+        
+        instance.setOportunidadesMejora(nuevaLista);
+        
+        // Verificamos que la lista haya sido reemplazada
+        assertEquals(1, instance.getOportunidadesMejora().size(), "La lista de oportunidades debe tener un elemento después de setOportunidadesMejora.");
+        assertTrue(instance.getOportunidadesMejora().contains("Física avanzada"), "La lista debe contener la nueva oportunidad.");
     }
 
-    /**
-     * Test of agregarLogro method, of class Portafolio.
-     */
+    // -------------------------------------------------------------------------
+    // PRUEBAS DE LÓGICA DE NEGOCIO (AGREGAR)
+    // -------------------------------------------------------------------------
+
     @Test
     public void testAgregarLogro() {
-        System.out.println("agregarLogro");
-        Logro logro = null;
-        Portafolio instance = new Portafolio();
+        System.out.println("testAgregarLogro");
+        Logro logro = new Logro(5, "Arte", "Dibujo técnico");
+        
+        // Agregamos el logro
         instance.agregarLogro(logro);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        // Verificamos el tamaño y el contenido
+        assertEquals(1, instance.getLogros().size(), "Debe haber 1 logro después de agregarlo.");
+        assertTrue(instance.getLogros().contains(logro), "El logro agregado debe estar presente en la lista.");
     }
 
-    /**
-     * Test of agregarOportunidadMejora method, of class Portafolio.
-     */
     @Test
     public void testAgregarOportunidadMejora() {
-        System.out.println("agregarOportunidadMejora");
-        String oportunidad = "";
-        Portafolio instance = new Portafolio();
+        System.out.println("testAgregarOportunidadMejora");
+        String oportunidad = "Reforzar Cálculo";
+        
+        // Agregamos la oportunidad
         instance.agregarOportunidadMejora(oportunidad);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        // Verificamos el tamaño y el contenido
+        assertEquals(1, instance.getOportunidadesMejora().size(), "Debe haber 1 oportunidad después de agregarla.");
+        assertTrue(instance.getOportunidadesMejora().contains(oportunidad), "La oportunidad agregada debe estar presente en la lista.");
     }
-    
 }

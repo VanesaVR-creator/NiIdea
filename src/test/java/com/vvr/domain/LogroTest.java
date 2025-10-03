@@ -12,124 +12,102 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- *
+ * Clase de prueba unitaria para la clase Logro.
  * @author vanesa
  */
 public class LogroTest {
     
+    // 1. Declarar la instancia fuera de los métodos para que todos la vean
+    private Logro instance; 
+    
+    // Datos de prueba
+    private final int ID_PRUEBA = 10;
+    private final String CAT_PRUEBA = "Deporte";
+    private final String DESC_PRUEBA = "Ganó medalla de oro";
+    
     public LogroTest() {
     }
 
-    @org.junit.jupiter.api.BeforeAll
-    public static void setUpClass() throws Exception {
-    }
+    // Métodos de configuración globales (no necesitan modificación)
+    @BeforeAll
+    public static void setUpClass() throws Exception { }
 
-    @org.junit.jupiter.api.AfterAll
-    public static void tearDownClass() throws Exception {
-    }
+    @AfterAll
+    public static void tearDownClass() throws Exception { }
 
-    @org.junit.jupiter.api.BeforeEach
+    // 2. Usar @BeforeEach para inicializar la instancia ANTES de cada test
+    @BeforeEach
     public void setUp() throws Exception {
+        // Creamos una nueva instancia limpia para cada prueba
+        instance = new Logro(ID_PRUEBA, CAT_PRUEBA, DESC_PRUEBA); 
     }
 
-    @org.junit.jupiter.api.AfterEach
+    @AfterEach
     public void tearDown() throws Exception {
+        // Limpiamos la instancia después de cada prueba si es necesario (opcional para POJOs)
+        instance = null; 
     }
     
+    // --- Pruebas funcionales corregidas ---
 
-    /**
-     * Test of getId method, of class Logro.
-     */
-    @org.junit.jupiter.api.Test
+    @Test
     public void testGetId() {
-        System.out.println("getId");
-        Logro instance = null;
-        int expResult = 0;
+        System.out.println("testGetId");
+        int expResult = ID_PRUEBA; // Esperamos el ID que pusimos en setUp()
         int result = instance.getId();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-       // fail("The test case is a prototype.");
+        assertEquals(expResult, result, "El ID retornado debe ser el ID de inicialización.");
     }
 
-    /**
-     * Test of setId method, of class Logro.
-     */
-    @org.junit.jupiter.api.Test
+    @Test
     public void testSetId() {
-        System.out.println("setId");
-        int id = 0;
-        Logro instance = null;
-        instance.setId(id);
-        // TODO review the generated test code and remove the default call to fail.
-       // fail("The test case is a prototype.");
+        System.out.println("testSetId");
+        int nuevoId = 20;
+        instance.setId(nuevoId);
+        // Verificamos que el cambio se haya aplicado
+        assertEquals(nuevoId, instance.getId(), "El ID debe cambiar después de llamar a setId."); 
     }
 
-    /**
-     * Test of getCategoria method, of class Logro.
-     */
-    @org.junit.jupiter.api.Test
+    @Test
     public void testGetCategoria() {
-        System.out.println("getCategoria");
-        Logro instance = null;
-        String expResult = "";
+        System.out.println("testGetCategoria");
+        String expResult = CAT_PRUEBA; 
         String result = instance.getCategoria();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-     //   fail("The test case is a prototype.");
+        assertEquals(expResult, result, "La categoría debe coincidir con la de inicialización.");
     }
 
-    /**
-     * Test of setCategoria method, of class Logro.
-     */
-    @org.junit.jupiter.api.Test
+    @Test
     public void testSetCategoria() {
-        System.out.println("setCategoria");
-        String categoria = "";
-        Logro instance = null;
-        instance.setCategoria(categoria);
-        // TODO review the generated test code and remove the default call to fail.
-      //  fail("The test case is a prototype.");
+        System.out.println("testSetCategoria");
+        String nuevaCategoria = "Liderazgo";
+        instance.setCategoria(nuevaCategoria);
+        // Verificamos que el cambio se haya aplicado
+        assertEquals(nuevaCategoria, instance.getCategoria(), "La categoría debe cambiar después de llamar a setCategoria."); 
     }
 
-    /**
-     * Test of getDescripcion method, of class Logro.
-     */
-    @org.junit.jupiter.api.Test
+    @Test
     public void testGetDescripcion() {
-        System.out.println("getDescripcion");
-        Logro instance = null;
-        String expResult = "";
+        System.out.println("testGetDescripcion");
+        String expResult = DESC_PRUEBA; 
         String result = instance.getDescripcion();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        assertEquals(expResult, result, "La descripción debe coincidir con la de inicialización.");
     }
 
-    /**
-     * Test of setDescripcion method, of class Logro.
-     */
-    @org.junit.jupiter.api.Test
+    @Test
     public void testSetDescripcion() {
-        System.out.println("setDescripcion");
-        String descripcion = "";
-        Logro instance = null;
-        instance.setDescripcion(descripcion);
-        // TODO review the generated test code and remove the default call to fail.
-       // fail("The test case is a prototype.");
+        System.out.println("testSetDescripcion");
+        String nuevaDescripcion = "Logró un puntaje de 90%";
+        instance.setDescripcion(nuevaDescripcion);
+        // Verificamos que el cambio se haya aplicado
+        assertEquals(nuevaDescripcion, instance.getDescripcion(), "La descripción debe cambiar después de llamar a setDescripcion."); 
     }
 
-    /**
-     * Test of toString method, of class Logro.
-     */
-    @org.junit.jupiter.api.Test
+    @Test
     public void testToString() {
-        System.out.println("toString");
-        Logro instance = null;
-        String expResult = "";
+        System.out.println("testToString");
+        String expResult = "Logro #" + ID_PRUEBA + " [" + CAT_PRUEBA + "] - " + DESC_PRUEBA;
         String result = instance.toString();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-       // fail("The test case is a prototype.");
+        // Aseguramos que el formato de salida sea el correcto
+        assertEquals(expResult, result, "El método toString no devuelve el formato esperado."); 
     }
     
 }

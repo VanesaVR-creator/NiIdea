@@ -5,133 +5,121 @@
 package com.vvr.domain;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- *
+ * Pruebas unitarias para la clase abstracta Usuarios.
+ * Utiliza la clase interna UsuariosImpl para la instanciación.
  * @author vanesa
  */
 public class UsuariosTest {
     
+    // Instancia de la clase a probar (usando la implementación)
+    private Usuarios instance;
+    
+    // Valores de prueba
+    private final String NOMBRE_PRUEBA = "Prueba Nombre";
+    private final String CORREO_PRUEBA = "prueba@mail.com";
+    private final String ROL_PRUEBA = "Test Rol";
+
     public UsuariosTest() {
     }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
+
+    /**
+     * Inicializa una nueva instancia de UsuariosImpl antes de cada prueba.
+     */
     @BeforeEach
     public void setUp() {
+        // Inicializamos usando el constructor con parámetros de Usuarios
+        instance = new UsuariosImpl(NOMBRE_PRUEBA, CORREO_PRUEBA, ROL_PRUEBA); 
     }
-    
+
     @AfterEach
     public void tearDown() {
+        instance = null;
     }
 
-    /**
-     * Test of getNombre method, of class Usuarios.
-     */
+    // -------------------------------------------------------------------------
+    // PRUEBAS DE GETTERS Y SETTERS
+    // -------------------------------------------------------------------------
+
     @Test
     public void testGetNombre() {
-        System.out.println("getNombre");
-        Usuarios instance = new UsuariosImpl();
-        String expResult = "";
-        String result = instance.getNombre();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("testGetNombre");
+        // Comprobar el valor inicial
+        assertEquals(NOMBRE_PRUEBA, instance.getNombre(), "El nombre debe coincidir con el valor de inicialización.");
     }
 
-    /**
-     * Test of setNombre method, of class Usuarios.
-     */
     @Test
     public void testSetNombre() {
-        System.out.println("setNombre");
-        String nombre = "";
-        Usuarios instance = new UsuariosImpl();
-        instance.setNombre(nombre);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("testSetNombre");
+        String nuevoNombre = "Nuevo Nombre";
+        instance.setNombre(nuevoNombre);
+        // Comprobar que el valor se haya actualizado
+        assertEquals(nuevoNombre, instance.getNombre(), "setNombre debe actualizar el valor correctamente.");
     }
 
-    /**
-     * Test of getCorreo method, of class Usuarios.
-     */
     @Test
     public void testGetCorreo() {
-        System.out.println("getCorreo");
-        Usuarios instance = new UsuariosImpl();
-        String expResult = "";
-        String result = instance.getCorreo();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("testGetCorreo");
+        // Comprobar el valor inicial
+        assertEquals(CORREO_PRUEBA, instance.getCorreo(), "El correo debe coincidir con el valor de inicialización.");
     }
 
-    /**
-     * Test of setCorreo method, of class Usuarios.
-     */
     @Test
     public void testSetCorreo() {
-        System.out.println("setCorreo");
-        String correo = "";
-        Usuarios instance = new UsuariosImpl();
-        instance.setCorreo(correo);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("testSetCorreo");
+        String nuevoCorreo = "nuevo@dominio.com";
+        instance.setCorreo(nuevoCorreo);
+        // Comprobar que el valor se haya actualizado
+        assertEquals(nuevoCorreo, instance.getCorreo(), "setCorreo debe actualizar el valor correctamente.");
     }
 
-    /**
-     * Test of getRol method, of class Usuarios.
-     */
     @Test
     public void testGetRol() {
-        System.out.println("getRol");
-        Usuarios instance = new UsuariosImpl();
-        String expResult = "";
-        String result = instance.getRol();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("testGetRol");
+        // Comprobar el valor inicial
+        assertEquals(ROL_PRUEBA, instance.getRol(), "El rol debe coincidir con el valor de inicialización.");
     }
 
-    /**
-     * Test of setRol method, of class Usuarios.
-     */
     @Test
     public void testSetRol() {
-        System.out.println("setRol");
-        String rol = "";
-        Usuarios instance = new UsuariosImpl();
-        instance.setRol(rol);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("testSetRol");
+        String nuevoRol = "Administrador";
+        instance.setRol(nuevoRol);
+        // Comprobar que el valor se haya actualizado
+        assertEquals(nuevoRol, instance.getRol(), "setRol debe actualizar el valor correctamente.");
+    }
+
+    // -------------------------------------------------------------------------
+    // PRUEBA DEL MÉTODO ABSTRACTO
+    // -------------------------------------------------------------------------
+
+    @Test
+    public void testMostrarInformacion() {
+        System.out.println("testMostrarInformacion");
+        // No se puede verificar la salida (se requeriría captura de System.out),
+        // pero verificamos que el método se ejecute sin lanzar excepciones.
+        assertDoesNotThrow(() -> instance.mostrarInformacion(), 
+                           "Llamar a mostrarInformacion no debe lanzar excepciones.");
     }
 
     /**
-     * Test of mostrarInformacion method, of class Usuarios.
+     * Clase interna concreta para poder instanciar la clase abstracta Usuarios.
+     * Es obligatoria para las pruebas unitarias.
      */
-    @Test
-    public void testMostrarInformacion() {
-        System.out.println("mostrarInformacion");
-        Usuarios instance = new UsuariosImpl();
-        instance.mostrarInformacion();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    public static class UsuariosImpl extends Usuarios {
+        
+        // Constructor para llamar al constructor de la clase abstracta
+        public UsuariosImpl(String nombre, String correo, String rol) {
+            super(nombre, correo, rol);
+        }
 
-    public class UsuariosImpl extends Usuarios {
-
+        @Override
         public void mostrarInformacion() {
+            // Implementación vacía o de prueba, el objetivo es que no falle
         }
     }
     

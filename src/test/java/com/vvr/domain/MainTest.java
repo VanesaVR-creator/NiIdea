@@ -12,7 +12,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- *
+ * Prueba de integración simple para la clase Main.
+ * Su objetivo es verificar que el flujo de inicialización del programa 
+ * se ejecute completamente sin lanzar excepciones.
  * @author vanesa
  */
 public class MainTest {
@@ -20,6 +22,9 @@ public class MainTest {
     public MainTest() {
     }
     
+    // Los métodos @BeforeAll, @AfterAll, @BeforeEach, y @AfterEach se dejan vacíos, 
+    // ya que la clase Main no requiere configuración especial para su ejecución.
+
     @BeforeAll
     public static void setUpClass() {
     }
@@ -37,15 +42,21 @@ public class MainTest {
     }
 
     /**
-     * Test of main method, of class Main.
+     * Prueba la ejecución completa del método main.
+     * La prueba PASA si Main.main(args) se ejecuta hasta el final sin lanzar ninguna excepción.
      */
     @Test
     public void testMain() {
-        System.out.println("main");
+        System.out.println("--- Ejecutando testMain ---");
+        
+        // El System.out.println del main ejecutará el flujo de tu aplicación
         String[] args = null;
         Main.main(args);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        
+        // No se necesita ninguna aserción (assertEquals) aquí.
+        // Si el código llega a este punto sin excepciones, JUnit lo marca como EXITOSO.
+        
+        System.out.println("--- testMain finalizado exitosamente ---");
     }
     
 }
