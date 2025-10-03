@@ -14,10 +14,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Clase principal (Main) que sirve como punto de entrada de la aplicación.
+ * Inicializa los objetos del dominio (Alumno, Tutor, Coordinador) 
+ * y simula el flujo principal del programa.
  *
  * @author vanesa
  */
 public class Main {
+    
+    /**
+     * El método principal de la aplicación. 
+     * Ejecuta el flujo de inicialización, registro de datos y simulación de la supervisión.
+     * * @param args Argumentos de la línea de comandos (no utilizados).
+     */
     public static void main(String[] args) {
         // alumno
         Alumno alumno = new Alumno("Vanesa Velázquez", "TI22110054");

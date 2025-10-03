@@ -5,20 +5,36 @@
 package com.vvr.domain;
 
 /**
- *
+ * Representa a un usuario que tiene permisos para consultar la información
+ * de un alumno, como un Tutor o Padre de familia.
+ * Extiende la clase Usuarios.
  * @author vanesa
  */
 public class Chismoso extends Usuarios {
+    
+    /**
+     * Constructor para inicializar un objeto Chismoso (Tutor o Padre).
+     * El rol se establece por defecto como "Tutor/Padre de familia".
+     * * @param nombre El nombre completo del tutor/padre.
+     * @param correo La dirección de correo electrónico del tutor/padre.
+     */
     public Chismoso(String nombre, String correo) {
         super(nombre, correo, "Tutor/Padre de familia");
     }
 
+    /**
+     * Muestra la información básica del tutor (nombre y correo) por consola.
+     */
     @Override
     public void mostrarInformacion() {
         System.out.println("Tutor: " + nombre + " | Correo: " + correo);
     }
 
-    // método para consultar el portafolio de un alumno
+    /**
+     * Consulta y muestra el portafolio completo (calificaciones, logros y 
+     * oportunidades de mejora) de un alumno específico.
+     * * @param alumno El objeto Alumno cuya información se desea consultar.
+     */
     public void consultarAlumno(Alumno alumno) {
         System.out.println("\n El tutor " + nombre + " consulta al alumno: " + alumno.getNombre());
         System.out.println("Calificaciones: " + alumno.getCalificaciones());
