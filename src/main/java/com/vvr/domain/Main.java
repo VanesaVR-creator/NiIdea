@@ -10,48 +10,41 @@
  */
 package com.vvr.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author vanesa
  */
 public class Main {
     public static void main(String[] args) {
-        // Crear un alumno de ejemplo
-        Alumno alumno = new Alumno("Vanesa Velázquez", "A12345");
-
-        // Agregar calificaciones de ejemplo
+        // alumno
+        Alumno alumno = new Alumno("Vanesa Velázquez", "TI22110054");
         alumno.agregarCalificacion(95.0);
         alumno.agregarCalificacion(88.0);
         alumno.agregarCalificacion(60.0);
-        alumno.agregarCalificacion(73.5);
 
-        // Evaluamos logros y oportunidades automáticamente
-        for (double calificacion : alumno.getCalificaciones()) {
-            if (calificacion >= 90) {
-                alumno.getPortafolio().agregarLogro(new Logro("Excelente desempeño", calificacion));
-            } else if (calificacion < 70) {
-                alumno.getPortafolio().agregarOportunidadMejora("Mejorar en la materia con calificación " + calificacion);
-            }
-        }
+        // Registrar logros
+        alumno.getPortafolio().agregarLogro(new Logro(1, "Académico", "Obtuvo 95 en Matemáticas"));
+        alumno.getPortafolio().agregarLogro(new Logro(2, "Participación", "Participó en concurso de ciencias"));
 
-        // Mostrar datos del alumno
-        System.out.println("\n📌 Datos del alumno:");
-        System.out.println("Nombre: " + alumno.getNombre());
-        System.out.println("Número de control: " + alumno.getNumeroControl());
-        System.out.println("Calificaciones: " + alumno.getCalificaciones());
+        // Registrar oportunidad de mejora
+        alumno.getPortafolio().agregarOportunidadMejora("Reforzar Física (60)");
 
-        System.out.println("\n🏆 Logros:");
-        if (alumno.getPortafolio().getLogros().isEmpty()) {
-            System.out.println("Ningún logro registrado.");
-        } else {
-            alumno.getPortafolio().getLogros().forEach(System.out::println);
-        }
+        // tutor (chismoso)
+        Chismoso tutor = new Chismoso("Carlos Pérez", "carlos.tutor@mail.com");
+        tutor.mostrarInformacion();
+        tutor.consultarAlumno(alumno);
 
-        System.out.println("\n🔧 Oportunidades de mejora:");
-        if (alumno.getPortafolio().getOportunidadesMejora().isEmpty()) {
-            System.out.println("Ninguna oportunidad registrada.");
-        } else {
-            alumno.getPortafolio().getOportunidadesMejora().forEach(System.out::println);
-        }
+        // coordinador
+        Coordinador coord = new Coordinador("FJMP", "coordinacion@mail.com");
+        coord.mostrarInformacion();
+
+        List<Alumno> listaAlumnos = new ArrayList<>();
+        listaAlumnos.add(alumno);
+        listaAlumnos.add(new Alumno("Juan Ramírez", "B67890"));
+
+        coord.supervisarAlumnos(listaAlumnos);
     }
 }
